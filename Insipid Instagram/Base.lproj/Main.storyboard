@@ -38,33 +38,35 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PfQ-Jl-KuP">
-                                <rect key="frame" x="64" y="280.5" width="247" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="username"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVs-cH-7Xd">
-                                <rect key="frame" x="166" y="394" width="0.0" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.10139842050568759" blue="0.14135322567269482" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQS-Vk-bln">
-                                <rect key="frame" x="64" y="203" width="247" height="69.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="58"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aw3-Y3-cYD">
                                 <rect key="frame" x="158" y="356.5" width="58" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Aw3-Y3-cYD" secondAttribute="height" multiplier="58:33" id="oiL-vZ-JdZ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Log In"/>
                                 <connections>
                                     <action selector="onSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="33P-WU-Nrw"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PfQ-Jl-KuP">
+                                <rect key="frame" x="64" y="280.5" width="247" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="username"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQS-Vk-bln">
+                                <rect key="frame" x="64" y="203" width="247" height="69.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="58"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVs-cH-7Xd">
+                                <rect key="frame" x="168.5" y="397.5" width="38" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.10139842050568759" blue="0.14135322567269482" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -88,7 +90,9 @@
                             <constraint firstItem="KXe-cb-Lbx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="64" id="jyp-ao-e9i"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KXe-cb-Lbx" secondAttribute="trailing" constant="68" id="kY9-jS-tWL"/>
                             <constraint firstItem="KXe-cb-Lbx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="o5z-Xk-s1X"/>
+                            <constraint firstItem="xVs-cH-7Xd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oE8-IQ-xNx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dQS-Vk-bln" secondAttribute="trailing" constant="64" id="s0b-Yy-rev"/>
+                            <constraint firstItem="xVs-cH-7Xd" firstAttribute="top" secondItem="Aw3-Y3-cYD" secondAttribute="bottom" constant="8" id="zK1-1p-hEL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

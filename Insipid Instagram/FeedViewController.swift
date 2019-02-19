@@ -26,6 +26,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         // [END setup]
         db = Firestore.firestore()
         
+        db.collection("posts").getDocuments() {(querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            else {
+                self.posts = querySnapshot!.documents
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import Firebase
 
 class LoginViewController: UIViewController {
@@ -24,7 +23,7 @@ class LoginViewController: UIViewController {
         Firestore.firestore().settings = settings
         // [END setup]
         db = Firestore.firestore()
-
+        self.errorLabel.text = ""
         // Do any additional setup after loading the view.
     }
 
@@ -33,18 +32,14 @@ class LoginViewController: UIViewController {
         let email = usernameField.text!
         let password = passwordField.text!
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
-            guard let strongSelf = self else { return }
-            if error != nil {
-                self?.errorLabel.text = "Error logging in."
-                print(error?.localizedDescription as Any)
-            }
-            else {
-                self?.performSegue(withIdentifier: "loginSegue", sender: nil)
+        Auth.auth().signIn(withEmail: email, password: password) { (data, error) in
+            if error == nil {
+                self.errorLabel.text = ""
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            } else {
+                self.errorLabel.text = "Error logging in."
             }
         }
-        
-        self.performSegue(withIdentifier: "loginSegue", sender:  nil)
     }
     
     @IBAction func onSignUp(_ sender: Any) {
