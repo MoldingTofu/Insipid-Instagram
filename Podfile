@@ -8,7 +8,10 @@ target 'Insipid Instagram' do
   # Pods for Insipid Instagram
   pod "Parse"
   pod "AlamofireImage"
-  pod "Alamofire"
+  pod "Firebase/Core"
+  pod "Firebase/Firestore"
+  pod "Firebase/Auth"
+  pod "Firebase/Storage"
 
   target 'Insipid InstagramTests' do
     inherit! :search_paths
