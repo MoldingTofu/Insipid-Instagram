@@ -7,49 +7,60 @@
 //
 
 import UIKit
-import Parse
+import Alamofire
+import Firebase
 
 class LoginViewController: UIViewController {
 
+    var db: Firestore!
     @IBOutlet var usernameField: UITextField!
-    
     @IBOutlet var passwordField: UITextField!
+    @IBOutlet var errorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let settings = FirestoreSettings()
+        
+        Firestore.firestore().settings = settings
+        // [END setup]
+        db = Firestore.firestore()
 
         // Do any additional setup after loading the view.
     }
+
     
     @IBAction func onSignIn(_ sender: Any) {
-//        let username = usernameField.text!
-//        let password = passwordField.text!
-//
-//        PFUser.logInWithUsername(inBackground: username, password: password) { (user, error) in
-//            if error != nil {
-//                print(error?.localizedDescription as Any)
-//            }
-//            else {
-//                self.performSegue(withIdentifier: "loginSegue", sender: nil)
-//            }
-//        }
+        let email = usernameField.text!
+        let password = passwordField.text!
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
+            guard let strongSelf = self else { return }
+            if error != nil {
+                self?.errorLabel.text = "Error logging in."
+                print(error?.localizedDescription as Any)
+            }
+            else {
+                self?.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
+        }
+        
         self.performSegue(withIdentifier: "loginSegue", sender:  nil)
     }
     
     @IBAction func onSignUp(_ sender: Any) {
-//        let user = PFUser()
-//        user.username = usernameField.text
-//        user.password = passwordField.text
-//
-//        user.signUpInBackground { (success, error) in
-//            if error != nil {
-//                print(error?.localizedDescription as Any)
-//            }
-//            else {
-//                self.performSegue(withIdentifier: "loginSegue", sender: nil)
-//            }
-//        }
-        self.performSegue(withIdentifier: "loginSegue", sender: nil)
+        let email = usernameField.text!
+        let password = passwordField.text!
+        
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if error != nil {
+                self.errorLabel.text = "Error creating account."
+                print(error?.localizedDescription as Any)
+            }
+            else {
+                self.errorLabel.text = ""
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
+        }
     }
     
     /*
