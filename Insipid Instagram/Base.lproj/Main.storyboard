@@ -172,33 +172,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="52.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zB8-g6-cGK">
-                                                    <rect key="frame" x="8" y="8" width="45" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvj-ku-pFG">
-                                                    <rect key="frame" x="61" y="8" width="42" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvj-ku-pFG">
+                                                    <rect key="frame" x="8" y="8" width="359" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="tvj-ku-pFG" firstAttribute="leading" secondItem="zB8-g6-cGK" secondAttribute="trailing" constant="8" id="Fzi-UC-KSI"/>
-                                                <constraint firstItem="zB8-g6-cGK" firstAttribute="top" secondItem="JpX-nY-ErD" secondAttribute="top" constant="8" id="PT3-6j-EWP"/>
                                                 <constraint firstItem="tvj-ku-pFG" firstAttribute="top" secondItem="JpX-nY-ErD" secondAttribute="top" constant="8" id="R6E-eh-8Hp"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tvj-ku-pFG" secondAttribute="bottom" constant="8" id="WW8-Qh-FET"/>
-                                                <constraint firstItem="zB8-g6-cGK" firstAttribute="leading" secondItem="JpX-nY-ErD" secondAttribute="leading" constant="8" id="WiW-5H-nFk"/>
-                                                <constraint firstItem="tvj-ku-pFG" firstAttribute="leading" secondItem="zB8-g6-cGK" secondAttribute="trailing" constant="8" id="mLf-CO-VcY"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zB8-g6-cGK" secondAttribute="bottom" constant="8" id="uDN-GD-UsM"/>
+                                                <constraint firstItem="tvj-ku-pFG" firstAttribute="leading" secondItem="JpX-nY-ErD" secondAttribute="leading" constant="8" id="yfH-PB-9Bu"/>
                                                 <constraint firstAttribute="trailing" secondItem="tvj-ku-pFG" secondAttribute="trailing" constant="8" id="zpe-za-aQS"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="commentLabel" destination="tvj-ku-pFG" id="fQo-Pp-DVJ"/>
-                                            <outlet property="nameLabel" destination="zB8-g6-cGK" id="7mn-sR-sCI"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddCommentCell" id="195-eW-SvS">

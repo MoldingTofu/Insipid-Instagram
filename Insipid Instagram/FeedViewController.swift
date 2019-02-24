@@ -8,32 +8,39 @@
 
 import UIKit
 import Firebase
+import AlamofireImage
 import MessageInputBar
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MessageInputBarDelegate {
-
+    
     @IBOutlet var tableView: UITableView!
     var db: Firestore!
     var posts: [QueryDocumentSnapshot] = []
     let commentBar = MessageInputBar()
     var showsCommentBar = false
+    var selectedPost: QueryDocumentSnapshot!
+    let refreshPosts = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.keyboardDismissMode = .interactive
         
-        commentBar.inputTextView.placeholder = "Add a comment..."
+        commentBar.inputTextView.placeholder = "Add a comment"
         commentBar.sendButton.title = "Post"
         commentBar.delegate = self
-
+        
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardWillBeHidden(note:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-
         
-        // Do any additional setup after loading the view.
+        refresh()
+        refreshPosts.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.refreshControl = refreshPosts
+    }
+    
+    @objc func refresh() {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         // [END setup]
@@ -46,6 +53,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             else {
                 self.posts = querySnapshot!.documents
                 self.tableView.reloadData()
+                self.refreshPosts.endRefreshing()
             }
         }
     }
@@ -57,7 +65,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
+        var comment = text
+        comment = Auth.auth().currentUser!.uid + ": " + comment
         
+        db.collection("posts").document(selectedPost.documentID).updateData([
+            "comments": FieldValue.arrayUnion([comment])
+            ])
+        
+        self.tableView.reloadData()
         
         commentBar.inputTextView.text = nil
         showsCommentBar = false
@@ -98,7 +113,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let posts = self.posts[indexPath.row]
+        let posts = self.posts[indexPath.section].data()
         let comments = posts["comments"] as? [String] ?? []
         
         if indexPath.row == 0 {
@@ -129,26 +144,26 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = posts[indexPath.row]
         let comments = post["comments"] as? [String] ?? []
-        if indexPath.row == comments.count + 1 {
+        
+        if indexPath.row == 0 {
             showsCommentBar = true
             becomeFirstResponder()
             commentBar.inputTextView.becomeFirstResponder()
+            selectedPost = post
         } else {
             showsCommentBar = false
             becomeFirstResponder()
             commentBar.inputTextView.becomeFirstResponder()
         }
-        
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
